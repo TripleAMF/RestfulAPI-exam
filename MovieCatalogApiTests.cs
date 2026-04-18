@@ -24,8 +24,8 @@ namespace MovieCatalogTests
             loginRequest.AddJsonBody(new { email = Email, password = Password });
 
             var loginResponse = tempClient.Execute(loginRequest);
-            var loginData = JsonConvert.DeserializeObject<dynamic>(loginResponse.Content);
-            string token = loginData["accessToken"].ToString();
+            var loginData = JsonConvert.DeserializeObject<dynamic>(loginResponse.Content!);
+            string token = loginData!["accessToken"].ToString();
 
             var options = new RestClientOptions(BaseUrl)
             {
@@ -46,7 +46,7 @@ namespace MovieCatalogTests
             });
 
             var response = _client.Execute(request);
-            var responseData = JsonConvert.DeserializeObject<ApiResponseDto>(response.Content);
+            var responseData = JsonConvert.DeserializeObject<ApiResponseDto>(response.Content!);
 
             Assert.That(response.StatusCode, Is.EqualTo(System.Net.HttpStatusCode.OK));
             Assert.That(responseData.Movie, Is.Not.Null);
@@ -80,7 +80,7 @@ namespace MovieCatalogTests
             var request = new RestRequest("/Catalog/All", Method.Get);
 
             var response = _client.Execute(request);
-            var movies = JsonConvert.DeserializeObject<List<MovieDto>>(response.Content);
+            var movies = JsonConvert.DeserializeObject<List<MovieDto>>(response.Content!);
 
             Assert.That(response.StatusCode, Is.EqualTo(System.Net.HttpStatusCode.OK));
             Assert.That(movies, Is.Not.Empty);
