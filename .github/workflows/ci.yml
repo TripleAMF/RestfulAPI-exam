@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore MovieCatalogTests.sln
 
       - name: Build solution
-        run: dotnet build MovieCatalogTests.sln --no-restore
+        run: dotnet build MovieCatalogTests/MovieCatalogTests.sln --no-restore
 
       - name: Run tests
-        run: dotnet test MovieCatalogTests.sln --no-build --verbosity normal
+        run: dotnet test MovieCatalogTests/MovieCatalogTests.sln --no-build --verbosity normal
